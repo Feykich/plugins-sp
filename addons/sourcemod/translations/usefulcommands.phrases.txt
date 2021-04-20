@@ -1,0 +1,38 @@
+"Phrases"
+{
+	"Hud"
+	{
+		"en"		"[Enable/Disable] Show Display Items on the map."
+		"ru"		"[Вкл./Выкл.] Отображение материи в HUD."
+	}
+	"BHud"
+	{
+		"en"		"[Enable/Disable] Show Display HP on breakable objects/bosses."
+		"ru"		"[Вкл./Выкл.] Отображение ХП разрушаемого объекта/босса."
+	}
+	"Music"
+	{
+		"en"		"[Enable/Disable] Music from the map. !volume - Music Volume Setting."
+		"ru"		"[Вкл./Выкл.] Музыка от карты. !volume - Настройка громкость музыки."
+	}
+	"StopSound"
+	{
+		"en"		"[Enable/Disable] Weapon Sounds."
+		"ru"		"[Вкл./Выкл.] Звуки Стрельбы."
+	}
+	"ZTele"
+	{
+		"en"		"ZTeleport back to spawn."
+		"ru"		"ЗТелепорт обратно на спавн."
+	}
+	"Knife"
+	{
+		"en"		"Get a knife if you lost it."
+		"ru"		"Можете получить нож обратно, если вы потеряли его."
+	}
+	"settings"
+	{
+		"en"		"Client Settings"
+		"ru"		"Настройки клиента"
+	}
+}
