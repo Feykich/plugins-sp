@@ -33,6 +33,6 @@ public void OnClientPutInServer(int client)
 	if(!IsFakeClient(client) && steam[6] != '0' && steam[6] != '1')
 	{
 		KickClient(client, "STEAM ID NOT VALIDATED. RESTART THE GAME");
-		LogMessage("Kicked a player with invalid STEAMID. Player's NickName: %d", nickname)
+		LogMessage("Kicked a player with invalid STEAMID. Player's NickName: %d", nickname);
 	}
 }
