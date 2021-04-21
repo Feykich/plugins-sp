@@ -1,0 +1,15 @@
+"Phrases"
+{
+	"RestartGame"
+	{
+		"#format"		"{1:s}"
+		"en"			"{1} {green}Restarted Round!"
+		"ru"			"{1} {green}Сделал Рестарт Раунд!"
+	}
+	"ForceEnd"
+	{
+		"#format"		"{1:s}"
+		"en"			"{1} {green}Force Ended Round for Zombies!"
+		"ru"			"{1} {green}Принудительно завершил раунд за Зомби!"
+	}
+}
