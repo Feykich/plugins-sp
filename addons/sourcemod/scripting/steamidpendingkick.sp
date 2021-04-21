@@ -26,10 +26,13 @@ public void OnPluginStart()
 
 public void OnClientPutInServer(int client)
 {
-    char steam[32];
-    GetClientAuthId(client, AuthId_Steam2, steam, 32);
-    if(!IsFakeClient(client) && steam[6] != '0' && steam[6] != '1')
-    {
-        KickClient(client, "STEAM ID NOT VALIDATED. RESTART THE GAME");
-    }
+	char steam[32];
+	char nickname[128];
+	GetClientName(client, nickname, sizeof(nickname));
+	GetClientAuthId(client, AuthId_Steam2, steam, 32);
+	if(!IsFakeClient(client) && steam[6] != '0' && steam[6] != '1')
+	{
+		KickClient(client, "STEAM ID NOT VALIDATED. RESTART THE GAME");
+		LogMessage("Kicked a player with invalid STEAMID. Player's NickName: %d", nickname)
+	}
 }
