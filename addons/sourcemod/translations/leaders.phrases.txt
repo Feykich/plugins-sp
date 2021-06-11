@@ -1,0 +1,204 @@
+"Phrases"
+{
+	"IsTheNewLeader1"
+	{
+		"#format"	"{1:s}"
+		"en"		"{white}{1} {green}is the new Leader!"
+		"ru"		"{white}{1} новый Лидер!"
+	}
+	"IsTheNewLeader2"
+	{
+		"#format"	"{1:s}"
+		"en"		"{white}{1} {green}is the new Leader!"
+		"ru"		"{white}{1} {green}новый Лидер!"
+	}
+	"IsTheNewLeader3"
+	{
+		"#format"	"{1:s}"
+		"en"		"{white}{1} {green}is the new Leader!"
+		"ru"		"{white}{1} {green}новый Лидер!"
+	}
+	"Voted"
+	{
+		"#format"	"{1:s}"
+		"en"		"{green}{1} has been voted to be the new Leader!"
+		"ru"		"{green}{1} проголосован стать новый Лидер!"
+	}
+	"Resigned"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} {green}has resigned from being Leader!"
+		"ru"		"{1} {green}Покинул пост Лидера!"
+	}
+	"VotedFor1"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} {green}has voted for {white}{1} {green}to be the leader."
+		"ru"		"{1} {green}проголосовал за {white}{1} {green} чтобы стать Лидером."
+	}
+	"ResignFromTheLeader"
+	{
+		"en"		"Resign from Leader"
+		"ru"		"Покинуть пост Лидера"
+	}
+	"spriteMenu"
+	{
+		"en"		"Sprite Menu"
+		"ru"		"Спрайт Меню"
+	}
+	"MarkerMenu"
+	{
+		"en"		"Marker Menu"
+		"ru"		"Маркер Меню"
+	}
+	"ToggleBeacon"
+	{
+		"en"		"Toggle Beacon"
+		"ru"		"Активировать Маяк"
+	}
+	"ToggleTrail"
+	{
+		"en"		"Toggle Trail"
+		"ru"		"Активировать Трейл"
+	}
+	"MuteAllPlayers"
+	{
+		"en"		"Mute All Players"
+		"ru"		"Замутить всех игроков"
+	}
+	"DrawaLine"
+	{
+		"en"		"Draw a Line"
+		"ru"		"Нарисовать линию"
+	}
+	"Died"
+	{
+		"en"		"The Leader has died!"
+		"ru"		"Лидер принял ислам!"
+	}
+	"Infected"
+	{
+		"en"		"The Leader has been infected!"
+		"ru"		"Лидер превратился в зомби!"
+	}
+	"Disconnect"
+	{
+		"en"		"The Leader has disconnected!"
+		"ru"		"Лидер покинул игру!"
+	}
+	"VotingDisabled"
+	{
+		"en"		"Voting for Leader is disabled."
+		"ru"		"Голосование за Лидера выключен."
+	}
+	"VotingAlready"
+	{
+		"en"		"You've already voted for this person!"
+		"ru"		"Вы уже проголосовали за этого игрока!"
+	}
+	"VoteForHuman"
+	{
+		"en"		"You have to vote for an alive human!"
+		"ru"		"Вы должны проголосовать за человека!"
+	}
+	"VoteGagged"
+	{
+		"en"		"You are not allowed to vote for Leader since you are gagged."
+		"ru"		"Вы не можете проголосовать за Лидер. У вас блокировка чат."
+	}
+	"VoteArgs1"
+	{
+		"en"		"Usage: {white}sm_voteleader <player>"
+		"ru"		"Напишите: {white}sm_voteleader <ник_игрока>"
+	}
+	"SpriteChanged"
+	{
+		"en"		"Sprite changed to 'Follow Me'."
+		"ru"		"Спрайт изменен на 'Follow Me'."
+	}
+	"SpriteChanged1"
+	{
+		"en"		"Sprite changed to 'Defend Here'."
+		"ru"		"Спрайт изменен на 'Defend Here'."
+	}
+	"SpriteRemoved"
+	{
+		"en"		"Sprite removed."
+		"ru"		"Спрайт убран."
+	}
+	"AlreadyLeader"
+	{
+		"en"		"There is already a Leader!"
+		"ru"		"Уже есть на пост Лидер!"
+	}
+	"FeatureForLeader"
+	{
+		"en"		"This Feature is Available for the Leader!"
+		"ru"		"Это функция доступна только для Лидер!"
+	}
+	"EveryoneMuted"
+	{
+		"en"		"Everyone is Muted by the Leader!"
+		"ru"		"У всех игроков заглушен микрофон!"
+	}
+	"EveryoneUnmuted"
+	{
+		"en"		"Everyone is Unmuted by the Leader!"
+		"ru"		"У всех игроков включен микрофон!"
+	}
+	"Paint"
+	{
+		"en"		"Usage: {white}bind <key> +paint"
+		"ru"		"Напишите в консоль: bind <кнопка> +paint"
+	}
+	"Possible"
+	{
+		"en"		"Possible Leaders currently online:"
+		"ru"		"Будущие Лидеры в сети:"
+	}
+	"Possible1"
+	{
+		"en"		"Possible Leaders currently online: none"
+		"ru"		"Будущие Лидеры в сети: никто"
+	}
+	"YouAreTheLeader1"
+	{
+		"en"		"You are now the Leader! Type !leader to open up the Leader menu."
+		"ru"		"Вы теперь Лидер! Напишите !leader чтобы открыть Лидер меню."
+	}
+	"YouAreTheLeader2"
+	{
+		"en"		"You are now the Leader! Type !leader to open up the Leader menu."
+		"ru"		"Вы теперь Лидер! Напишите !leader чтобы открыть Лидер меню."
+	}
+	"YouAreTheLeader3"
+	{
+		"en"		"You are now the Leader! Type !leader to open up the Leader menu."
+		"ru"		"Вы теперь Лидер! Напишите !leader чтобы открыть Лидер меню."
+	}
+	"CurrentRemoved"
+	{
+		"en"		"The current Leader has been removed!"
+		"ru"		"Текущий Лидер был снят!"
+	}
+	"CurrentRemoved1"
+	{
+		"en"		"The current Leader has been removed!"
+		"ru"		"Текущий Лидер был снят!"
+	}
+	"NoCurrent"
+	{
+		"en"		"There is no current Leader!"
+		"ru"		"В данном момент нет текущего Лидера!"
+	}
+	"NoCurrent1"
+	{
+		"en"		"There is no current Leader!"
+		"ru"		"В данном момент нет текущего Лидера!"
+	}
+	"CurrentLeaderIs"
+	{
+		"en"		"The current Leader is"
+		"ru"		"Текущий Лидер:"
+	}
+}
