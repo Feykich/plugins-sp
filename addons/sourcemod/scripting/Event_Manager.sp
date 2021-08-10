@@ -19,17 +19,17 @@ Handle TimerHandle;
 
 float g_fTrans[MAXPLAYERS + 1] =  { 1.001, ... };
 
-ConVar cVar_WarmupTime, g_cvBeamSprite, cVar_Hostname;
+ConVar cVar_WarmupTime, g_cvBeamSprite;
 
 bool EventStarted = false, StandartSelected = false, MiniSelected = false, StarWarsSelected = false;
 bool WarmupToggle = false, CheckEvent = false, StarWarsSkin = false, CheckTracers = false;
 bool g_bVisible[MAXPLAYERS + 1] =  { true, ... };
 
-char model[256], nick[128], oldHostname[256], newHostname[256];
+char model[256], nick[128];
 
 public Plugin myinfo = {
 	name = "[ZR] Event Manager",
-	author = "ZombieFeyk",
+	author = "ZombieFeyk, Cloud Strife + null138 (ty for helping)",
 	description = "Event Management",
 	version = PLUGIN_VERSION,
 	url = ""
@@ -238,60 +238,62 @@ void EventStartedToggle(int client)
 		else if(StandartSelected)
 		{
 			EventStarted = true;
-			Warmup(client);
 		}
 		else if(MiniSelected)
 		{
 			EventStarted = true;
-			Warmup(client);
 		}
 		else if(StarWarsSelected)
 		{
 			EventStarted = true;
 			CreateTimer(0.2, StarWarsMode);
-			Warmup(client);
 		}
+		Warmup(client);
 		return;
 	}
 	if(EventStarted == true)
 	{
 		EventStarted = false;
 		CPrintToChat(client, "{white}[EVENT] {green}You turned off an event!");
-		EventOff(client);
+		SetHostName(2);
 	}
 }
 
-
-public void EventOff(int client)
+void SetHostName(int type)
 {
-	cVar_Hostname.SetString(oldHostname);
-	CheckTracers = false;
-}
-
-void GetHostname()
-{
-	cVar_Hostname = FindConVar("hostname");
-	cVar_Hostname.GetString(oldHostname, 256);
-	cVar_Hostname.GetString(newHostname, 256);
-
-	if(cVar_Hostname && StandartSelected)
-	{
-		GetConVarString(cVar_Hostname, newHostname, sizeof(newHostname));
-		Format(newHostname, sizeof(newHostname), "[EVENT] %s", newHostname);
-		cVar_Hostname.SetString(newHostname);
-	}
-	else if(cVar_Hostname && MiniSelected)
-	{
-		GetConVarString(cVar_Hostname, newHostname, sizeof(newHostname));
-		Format(newHostname, sizeof(newHostname), "[MINI-EVENT] %s", newHostname);
-		cVar_Hostname.SetString(newHostname);
-	}
-	else if(cVar_Hostname && StarWarsSelected)
-	{
-		GetConVarString(cVar_Hostname, newHostname, sizeof(newHostname));
-		Format(newHostname, sizeof(newHostname), "[STAR-WARS EVENT] %s", newHostname);
-		cVar_Hostname.SetString(newHostname);
-	}
+    char buffer[120], hostname[120];
+    Handle cvHostname = FindConVar("hostname");
+    switch(type)
+    {
+        case 1:
+        {
+            if(StandartSelected)
+            {
+                GetConVarString(cvHostname, hostname, sizeof(hostname));
+                Format(buffer, sizeof(buffer), "[EVENT] %s", hostname);
+                SetConVarString(cvHostname, buffer, false, false);
+            }
+            else if(MiniSelected)
+            {
+                GetConVarString(cvHostname, hostname, sizeof(hostname));
+                Format(buffer, sizeof(buffer), "[MINI-EVENT] %s", hostname);
+                SetConVarString(cvHostname, buffer, false, false);
+            }
+            else if(StarWarsSelected)
+            {
+                GetConVarString(cvHostname, hostname, sizeof(hostname));
+                Format(buffer, sizeof(buffer), "[STAR-WARS EVENT] %s", hostname);
+                SetConVarString(cvHostname, buffer, false, false);
+            }
+        }
+        case 2:
+        {
+            GetConVarString(cvHostname, hostname, sizeof(hostname));
+            ReplaceString(hostname, sizeof(hostname), "[EVENT]", "", false);
+            ReplaceString(hostname, sizeof(hostname), "[MINI-EVENT]", "", false);
+            ReplaceString(hostname, sizeof(hostname), "[STAR-WARS EVENT]", "", false);
+        }
+    }
 }
 
 public void Warmup(int client)
@@ -302,7 +304,7 @@ public void Warmup(int client)
 	CPrintToChatAll("{white}[EVENT] {green}ADMIN {white}%s {green}HAS STARTED WARMUP EVENT", nick);
 	LogMessage("[LOG-EVENT] ADMIN %s STARTED AN EVENT", nick);
 	ServerCommand("mp_timeleft 180");
-	GetHostname();
+	SetHostName(1);
 	iWarmup = 0;
 	CS_TerminateRound(1.0, CSRoundEnd_Draw, false);
 	if(cVar_WarmupTime.IntValue > 0)
