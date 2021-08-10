@@ -6,7 +6,6 @@
 #define PLUGIN_VERSION "1.00"
 
 #include <sourcemod>
-#include <sdktools>
 
 #pragma newdecls required
 
