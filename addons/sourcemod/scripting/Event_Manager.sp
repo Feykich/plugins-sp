@@ -25,7 +25,7 @@ bool EventStarted = false, StandartSelected = false, MiniSelected = false, StarW
 bool WarmupToggle = false, CheckEvent = false, StarWarsSkin = false, CheckTracers = false;
 bool g_bVisible[MAXPLAYERS + 1] =  { true, ... };
 
-char model[256], nick[128];
+char nick[128], pathzm[PLATFORM_MAX_PATH], pathhm[PLATFORM_MAX_PATH], ModelPath[PLATFORM_MAX_PATH];
 
 public Plugin myinfo = {
 	name = "[ZR] Event Manager",
@@ -37,6 +37,8 @@ public Plugin myinfo = {
 
 public void OnPluginStart()
 {
+	BuildPath(Path_SM, ModelPath, sizeof(ModelPath), "configs/eventmanager.cfg");
+	
 	RegAdminCmd("sm_event", EventMenu, ADMFLAG_KICK);
 	//RegConsoleCmd("sm_bot", bot);
 
@@ -87,11 +89,11 @@ public Action EventMenu(int client, int args)
 		CheckEvent = true;
 	}
 	
-	SetMenuTitle(menu, "Event Manager\nMode: %s \n", cEventMode);
+	SetMenuTitle(menu, "Event Manager\n\nMode: %s", cEventMode);
     
 	AddMenuItem(menu, "start", "Start An Event");
 	AddMenuItem(menu, "cEventMode", "Event Selection");
-	AddMenuItem(menu, "restart", "Restart Round");
+	AddMenuItem(menu, "reload", "Reload Event Config File");
 	AddMenuItem(menu, "precache", "Precache Models [NECESSARILY]");
 
 	SetMenuExitBackButton(menu, true);
@@ -115,9 +117,9 @@ public int EventMenu_Handler(Handle EventMenu, MenuAction action, int client, in
 			{
 				EventMenuSelect(client);
 			}
-			if(StrEqual(list, "restart"))
+			if(StrEqual(list, "reload"))
 			{
-				FakeClientCommand(client, "say /rr");
+				ConfigModelPath();
 			}
 			if(StrEqual(list, "precache"))
 			{
@@ -157,7 +159,7 @@ public void EventMenuSelect(int client)
 	if(StarWarsSelected)
 		cEventMode = "Star Wars Event";
 
-	SetMenuTitle(menu, "Event Selection\nMode: %s", cEventMode);
+	SetMenuTitle(menu, "Event Selection\n\nMode: %s", cEventMode);
 
 	AddMenuItem(menu, "standart", "Standart Event");
 	AddMenuItem(menu, "minievent", "Mini Event");
@@ -238,23 +240,26 @@ void EventStartedToggle(int client)
 		else if(StandartSelected)
 		{
 			EventStarted = true;
+			Warmup(client);
 		}
 		else if(MiniSelected)
 		{
 			EventStarted = true;
+			Warmup(client);
 		}
 		else if(StarWarsSelected)
 		{
 			EventStarted = true;
 			CreateTimer(0.2, StarWarsMode);
+			Warmup(client);
 		}
-		Warmup(client);
 		return;
 	}
 	if(EventStarted == true)
 	{
 		EventStarted = false;
 		CPrintToChat(client, "{white}[EVENT] {green}You turned off an event!");
+		DeleteTimer();
 		SetHostName(2);
 	}
 }
@@ -347,27 +352,12 @@ public void DeleteTimer()
 	}
 }
 
-void cPrecacheModel(int client)
-{
-	GetClientName(client, nick, sizeof(nick));
-	PrecacheModel("models/player/sourcegear.ru/human/stormtrooper/stormtrooper.mdl", true);
-	PrecacheModel("models/player/legion/zombi/stormtrooper.mdl", true);
-	for(int i = 1; i < MaxClients; i++)
-	{
-		if(IsValidClient(i) && GetAdminFlag(GetUserAdmin(i), Admin_Kick))
-		{
-			CPrintToChat(i, "{white}[ADM-WARNING]{green} Admin {white}%s {green}has Precached {white}EVENT{green} models!", nick);
-		}
-	}
-	CPrintToChat(client, "{white}[EVENT] {green}Models successfully precached!");
-}
-
 public void ZR_OnClientInfected(int client, int attacker, bool motherInfect, bool respawnOverride, bool respawn)
 {
 	if(StarWarsSkin)
 	{
-		FormatEx(model, sizeof(model), "models/player/legion/zombi/stormtrooper.mdl"); // Put here new model Stormtrooper as Zombie
-		SetEntityModel(client, model);
+		FormatEx(pathzm, sizeof(pathzm), "%s", pathzm);
+		SetEntityModel(client, pathzm);
 	}
 }
 
@@ -375,8 +365,8 @@ public Action ZR_OnClientHuman(int &client, bool &respawn, bool &protect)
 {
 	if(StarWarsSkin)
 	{
-		FormatEx(model, sizeof(model), "models/player/sourcegear.ru/human/stormtrooper/stormtrooper.mdl"); // Put here new model Stormtrooper as Zombie
-		SetEntityModel(client, model);
+		FormatEx(pathhm, sizeof(pathhm), "%s", pathhm);
+		SetEntityModel(client, pathhm);
 	}
 }
 
@@ -384,8 +374,8 @@ public void ZR_OnClientHumanPost(int client, bool respawn, bool protect)
 {
 	if(StarWarsSkin)
 	{
-		FormatEx(model, sizeof(model), "models/player/sourcegear.ru/human/stormtrooper/stormtrooper.mdl"); // Put here new model Stormtrooper as Human
-		SetEntityModel(client, model);
+		FormatEx(pathhm, sizeof(pathhm), "%s", pathhm);
+		SetEntityModel(client, pathhm);
 	}
 }
 
@@ -396,16 +386,17 @@ public Action StarWarsMode(Handle timer)
 	{
 		if(IsClientInGame(i) && IsPlayerAlive(i) && ZR_IsClientZombie(i))
 		{
-			FormatEx(model, sizeof(model), "models/player/legion/zombi/stormtrooper.mdl"); // Put here new model Stormtrooper as Zombie
-			SetEntityModel(i, model);
+			FormatEx(pathzm, sizeof(pathzm), "%s", pathzm);
+			SetEntityModel(i, pathzm);
 		}
 		if(IsClientInGame(i) && IsPlayerAlive(i) && ZR_IsClientHuman(i))
 		{
-			FormatEx(model, sizeof(model), "models/player/sourcegear.ru/human/stormtrooper/stormtrooper.mdl"); // Put here new model Stormtrooper as Human
-			SetEntityModel(i, model);
+			FormatEx(pathhm, sizeof(pathhm), "%s", pathhm);
+			SetEntityModel(i, pathhm);
 		}
 	}
 }
+
 
 public Action OnEventStart(Handle event, char[] name, bool dontBroadcast)
 {
@@ -437,20 +428,13 @@ public Action OnEventStart(Handle event, char[] name, bool dontBroadcast)
 	}
 }
 
+
 public Action OnSpawned(Handle event, char[] name, bool dontBroadcast)
 {
 	if(EventStarted && StarWarsSelected)
 	{
 		CreateTimer(0.2, StarWarsMode);
 	}
-}
-
-public void OnMapStart()
-{
-	PrecacheModel("models/player/sourcegear.ru/human/stormtrooper/stormtrooper.mdl", true); // Put here new model Stormtrooper as Human
-	PrecacheModel("models/player/legion/zombi/stormtrooper.mdl", true); // Put here new model Stormtrooper as Zombie
-
-	CreateTimer(0.2, StarWarsMode);
 }
 
 bool IsValidClient(int client, bool nobots = true)
@@ -460,6 +444,51 @@ bool IsValidClient(int client, bool nobots = true)
 		return false;
 	}
 	return IsClientInGame(client);
+}
+
+void cPrecacheModel(int client)
+{
+	GetClientName(client, nick, sizeof(nick));
+	PrecacheModel(pathhm, true);
+	PrecacheModel(pathzm, true);
+	for(int i = 1; i < MaxClients; i++)
+	{
+		if(IsValidClient(i) && GetAdminFlag(GetUserAdmin(i), Admin_Kick))
+		{
+			CPrintToChat(i, "{white}[ADM-WARNING]{green} Admin {white}%s {green}has Precached {white}EVENT{green} models!", nick);
+		}
+	}
+	CPrintToChat(client, "{white}[EVENT] {green}Models successfully precached!");
+}
+
+void ConfigModelPath()
+{
+	KeyValues kv = new KeyValues("Models");
+	
+	if(!FileExists(ModelPath))
+	{
+		SetFailState("Couldn't not found a file %s", ModelPath);
+		return;
+	}
+
+	if(!kv.ImportFromFile(ModelPath))
+	{
+		SetFailState("Couldn't import from file %s", ModelPath);
+		return;
+	}
+
+	if(!kv.JumpToKey("StarWars"))
+	{
+		SetFailState("Couldn't Jump to Key from file %s", ModelPath);
+		return;
+	}
+	
+	kv.GetString("modelhumans", pathhm, sizeof(pathhm), "");
+	kv.GetString("modelzombies", pathzm, sizeof(pathzm), "");
+		
+	kv.GoBack();
+
+	CloseHandle(kv);
 }
 
 // Sourcecode of VIP Tracers by R1KO & Cloud Strife
