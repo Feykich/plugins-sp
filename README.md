@@ -1,1 +1,2 @@
-Outdated or not working plugins stuff for CS:Source.
+Outdated Plugins for CS:Source
+Some of them will not work.
