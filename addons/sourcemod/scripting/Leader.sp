@@ -1210,10 +1210,9 @@ public void MuteAllMenu(int client)
 	
 	SetMenuTitle(menu, "Mute All Menu [Mute duration: 10 Sec.]");
 	
-	AddMenuItem(menu, "muteall", "Mute All (including Admins) [!muteall]");
+	AddMenuItem(menu, "muteall", "Mute All [!muteall]");
 	AddMenuItem(menu, "zombies", "Mute Zombies [!mutet]");
 	AddMenuItem(menu, "humans", "Mute Humans [!mutect]");
-	AddMenuItem(menu, "admins", "Enable Mute for Admins? (work in progress)");
 	
 	SetMenuExitBackButton(menu, true);
 	SetMenuExitButton(menu, true);
@@ -1241,10 +1240,6 @@ public int MuteAllMenu_Handler(Handle menumuteall, MenuAction action, int client
 			if(StrEqual(hmute, "humans"))
 			{
 				ToggleTimerMuteHumans(client, position);
-				LeaderMenu(client);
-			}
-			if(StrEqual(hmute, "admins"))
-			{
 				LeaderMenu(client);
 			}
 		}
