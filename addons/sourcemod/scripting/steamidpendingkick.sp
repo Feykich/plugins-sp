@@ -9,8 +9,6 @@
 
 #pragma newdecls required
 
-ConVar steamidkick;
-
 public Plugin myinfo = 
 {
 	name = "Simple STEAMID_PENDING Kicker",
