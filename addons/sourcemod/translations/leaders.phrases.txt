@@ -154,12 +154,12 @@
 	"Possible"
 	{
 		"en"		"Possible Leaders currently online:"
-		"ru"		"Будущие Лидеры в сети:"
+		"ru"		"Возможные Лидеры в сети:"
 	}
 	"Possible1"
 	{
 		"en"		"Possible Leaders currently online: none"
-		"ru"		"Будущие Лидеры в сети: никто"
+		"ru"		"Возможные Лидеры в сети: никто"
 	}
 	"YouAreTheLeader1"
 	{
