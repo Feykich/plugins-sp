@@ -1971,7 +1971,7 @@ public Action VoteLeader(int client, int argc)
 		{
 			if(IsClientInGame(i))
 			{
-				CPrintToChat(i, "{white}[SM] %T", "Voted", i, target, name2);
+				CPrintToChat(i, "{white}[SM] %N %T", "Voted", i, target);
 			}
 		}
 		SetLeader(target);
