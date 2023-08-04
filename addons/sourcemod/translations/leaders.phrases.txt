@@ -20,9 +20,8 @@
 	}
 	"Voted"
 	{
-		"#format"	"{1:s}"
-		"en"		"{green}{1} has been voted to be the new Leader!"
-		"ru"		"{green}{1} проголосован стать новый Лидер!"
+		"en"		"{green}has been voted to be the new Leader!"
+		"ru"		"{green}проголосован стать новый Лидер!"
 	}
 	"Resigned"
 	{
