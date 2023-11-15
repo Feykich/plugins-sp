@@ -6,7 +6,6 @@
 #include <sourcemod>
 #include <sdktools>
 #include <sdkhooks>
-#include <multicolors>
 #include <zombiereloaded>
 
 #pragma newdecls required
@@ -80,7 +79,7 @@ public Action RoundStart(Event event, const char[] name, bool dontBroadcast)
 	if(bEnabledGame == true)
 	{
 		CreateTimer(5.0, TimerDelay);
-		CPrintToChatAll("{white}[Randomizer] {green}In 5 Seconds will be selected game mode this round!");
+		CPrintToChatAll("[Randomizer] In 5 Seconds will be selected game mode this round!");
 	}
 	return Plugin_Handled;
 }
