@@ -148,7 +148,7 @@
 	"Paint"
 	{
 		"en"		"Usage: {white}bind <key> +paint"
-		"ru"		"Напишите в консоль: bind <кнопка> +paint"
+		"ru"		"Напишите в консоль: {white}bind <кнопка> +paint"
 	}
 	"Possible"
 	{
@@ -197,7 +197,7 @@
 	}
 	"CurrentLeaderIs"
 	{
-		"en"		"The current Leader is"
+		"en"		"The current Leader is: "
 		"ru"		"Текущий Лидер:"
 	}
 }
