@@ -1,0 +1,66 @@
+#pragma semicolon 1
+
+#define DEBUG
+
+#define PLUGIN_AUTHOR ""
+#define PLUGIN_VERSION "0.00"
+
+#include <sourcemod>
+
+#pragma newdecls required
+
+public Plugin myinfo = 
+{
+	name = "",
+	author = PLUGIN_AUTHOR,
+	description = "",
+	version = PLUGIN_VERSION,
+	url = ""
+};
+
+public void OnPluginStart()
+{
+	LoadTranslations("rmap.phrases");
+	
+	RegAdminCmd("sm_rmap", RestartMap, ADMFLAG_BAN);
+}
+
+public Action RestartMap(int client, int args)
+{
+	DataPack data = new DataPack();
+	data.Reset();
+	
+	char sMap[256];
+	GetCurrentMap(sMap, sizeof(sMap));
+	
+	data.WriteString(sMap);
+	
+	PrintToServer("[RMAP] %N Restarted the Map!..", client);
+	LogMessage("[RMAP] %N Restarted the Map!..", client);
+	for (int i = 1; i <= MaxClients; i++)
+	{
+		if(!IsClientInGame(i))
+		{
+			continue;
+		}
+		if(GetAdminFlag(GetUserAdmin(i), Admin_Kick))
+		{
+			PrintToChat(i, "[RMAP] %N Restarted the Map!", client);
+			PrintToChat(i, "[RMAP] %N Restarted the Map!", client);
+		}
+		PrintToChat(i, "[RMAP] %T", "Restarting Map", i);
+	}
+	CreateTimer(3.0, MapChangeTime, data, TIMER_FLAG_NO_MAPCHANGE);
+}
+
+public Action MapChangeTime(Handle timer, any datapack)
+{
+	DataPack data = datapack;
+	data.Reset();
+	
+	char sMap[256];
+	data.ReadString(sMap, 256);
+	
+	ForceChangeLevel(sMap, "sm_rmap Command");
+	return Plugin_Stop;
+}
