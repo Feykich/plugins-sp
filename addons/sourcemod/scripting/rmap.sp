@@ -31,6 +31,7 @@ public Action RestartMap(int client, int args)
 {
 	PrintToServer("[RMAP] %N Restarted the Map!..", client);
 	LogMessage("[RMAP] %N Restarted the Map!..", client);
+	GetCurrentMap(map, sizeof(map));
 	for (int i = 1; i <= MaxClients; i++)
 	{
 		if(!IsClientInGame(i))
@@ -39,13 +40,9 @@ public Action RestartMap(int client, int args)
 		}
 		if(GetAdminFlag(GetUserAdmin(i), Admin_Kick))
 		{
-			PrintToChat(i, "[RMAP] %N %T", client, i);
-			PrintToChat(i, "[RMAP] %N %T", client, i);
+			PrintToChat(i, "[RMAP] %N Restarted the Map!", client);
+			PrintToChat(i, "[RMAP] %N Restarted the Map!", client);
 		}
-	}
-	GetCurrentMap(map, sizeof(map));
-	for (int i = 1; i <= MaxClients; i++)
-	{
 		PrintToChat(i, "[RMAP] %T", "Restarting Map", i);
 	}
 	CreateTimer(3.0, MapChangeTime, _, TIMER_FLAG_NO_MAPCHANGE);
