@@ -5,9 +5,4 @@
 		"en"	"Restarting the current map!"
 		"ru"	"Перезапуск текущей карты!.."
 	}
-	"Admin Restarted"
-	{
-		"en"	"Restarted the Map!.."
-		"ru"	"Перезапустил карту!.."
-	}
 }
